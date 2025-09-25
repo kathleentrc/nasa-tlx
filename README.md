@@ -1,5 +1,4 @@
 # NASA Task Load Index (NASA-TLX)
-========
 
 ## About
 This is an implementation of the NASA Task Load Index (NASA-TLX).
