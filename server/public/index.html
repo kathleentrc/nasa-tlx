@@ -10,116 +10,25 @@
 	<body>
 		<article>
 			<header>
-				<h1>Subjective Assessment</h1>
+				<h1>CrowdCast : Usability Testing</h1>
 			</header>
 			
 			<section class="step_0">
-				<h2>Participant and Experiment Group</h2>
 				<div class="cf">
-					<p>To be filled in by the experimenter.</p>
-					<section class="first">
-						<h3>Participant ID</h3>
-						<!-- <h4><label for="create_proband">Create new participant</label></h4> -->
+					<section class="center">
+
+						<h3 class="heading-space">Nickname</h3>
+						
 						<form>
 							<input type="text" id="participant_id" required>
-							<!-- <input type="submit" value="Create"> -->
 						</form>
-						<!-- <h4>Starting task</h4>
-						<form class="list">
-							<div>
-								<div>
-									<input type="radio" name="starting_task" id="starting_task_1" value="1"> 
-									<label for="starting_task_1">Task I</label>
-								</div>
-								<div>
-									<input type="radio" name="starting_task" id="starting_task_2" value="2"> 
-									<label for="starting_task_2">Task II</label>
-								</div>
-							</div>
-						</form> -->
-					</section>
-					<section class="second">
-						<h3>Experiment Group</h3>
-						<!-- <h4><label for="create_task">Create new task</label></h4>
-						<form>
-							<input type="text" id="create_task" required>
-							<input type="submit" value="Create">
-						</form> -->
-						<!-- <h4>Choose task</h4> -->
-						<form class="list">
-							<div>
-								<div>
-									<input type="radio" name="experiment_group" id="group_1" value="1">	<!-- starts with STROOP Test -->
-									<label for="group_1">Group 1</label>
-								</div>
-								<div>
-									<input type="radio" name="experiment_group" id="group_2" value="2"> <!-- starts with STRESS Test -->
-									<label for="group_2">Group 2</label>
-								</div>
-								<!-- <div>
-									<input type="radio" name="experiment_group" id="group_3" value="3">
-									<label for="group_3">Group 3</label>
-								</div>
-								<div>
-									<input type="radio" name="experiment_group" id="group_4" value="4">
-									<label for="group_4">Group 4</label>
-								</div>
-								<div>
-									<input type="radio" name="experiment_group" id="group_5" value="5">
-									<label for="group_5">Group 5</label>
-								</div>
-								<div>
-									<input type="radio" name="experiment_group" id="group_6" value="6">
-									<label for="group_6">Group 6</label>
-								</div> -->
-							</div>
-						</form>
+						
 					</section>
 				</div>
+
 				<div class="alert alert-warning" role="alert"></div>
 				<button>Start</button>
-				<!-- <p class="go_back">or go <a href="#">back to the overview page</a></p> -->
-			</section>
-
-			<section class="step_1">
-				<h2>Demographics</h2>
-				<div class="cf">
-					<h3>Welcome to the experiment!</h3>
-					<p>Please fill in the following demographic information:</p>
-					<section class="first">
-						<h3>Age</h3>
-						<input type="text" id="age" required>
-					</section>
-					<section class="second">
-						<h3>Gender</h3>
-						<form class="list">
-							<div>
-								<div>
-									<input type="radio" name="gender" id="gender_f" value="female">
-									<label for="gender_f">Female</label>
-								</div>
-								<div>
-									<input type="radio" name="gender" id="gender_m" value="male">
-									<label for="gender_m">Male</label>
-								</div>
-								<div>
-									<input type="radio" name="gender" id="gender_o" value="other">
-									<label for="gender_o">Other</label>
-								</div>
-								<div>
-									<input type="radio" name="gender" id="gender_x" value="none">
-									<label for="gender_x">I'd rather not say</label>
-								</div>
-							</div>
-						</form>
-					</section>
-					<section class="third">
-						<h3>Profession &amp; Background</h3>
-						<input type="text" id="profession" required>
-					</section>
-				</div>
-				<div class="alert alert-warning" role="alert"></div>
-				<button>Next</button>
+				
 			</section>
 
 			<section class="step_2">
@@ -170,61 +79,17 @@
 				</p>
 				<hr />
 			</section>
-			<section class="step_4"> 
-				<h2>Likert-style ratings</h2>
-				<section>
-					<h3>Perceived Stress</h3>
-					<p>I felt very stressed during the task.</p>
-					<div class="likert"></div>
-				</section>
-				<section>
-					<h3>Perceived Anxiety</h3>
-					<p>I felt very anxious during the task.</p>
-					<div class="likert"></div>
-				</section>
-				<section>
-					<h3>Focus</h3>
-					<p>The thermal intervention helped me concentrate on the task.</p>
-					<div class="likert"></div>
-				</section>
-				<section>
-					<h3>Distraction</h3>
-					<p>The thermal intervention distracted me from the task.</p>
-					<div class="likert"></div>
-				</section>
-				<button>Next</button>
-			</section>
+			
 			<section class="step_5">
 				<h2>Questionnaire completed!</h2>
 				<div></div>
 				<p><strong>Notify the experimenter</strong> that you are ready to continue with the next task. Then, come back and fill in the next questionnaire.</p>
 				<button>Next Questionnaire</button>
 			</section>
-			<section class="step_open_questions">
-				<h2>Final Questionnaire</h2>
-				<div class="alert alert-warning" role="alert"></div>
-				<h4>1. Which effect do you think the thermal interventions generally had on you?</h3>
-				<textarea id="general_effect"></textarea>
-				<h4>2. Which effect do you think each intervention had specifically on your task performance?</h3>
-				<textarea id="effect_task_performance"></textarea>
-				<h4>3. Which effect do you think each intervention had on your stress levels?</h3>
-				<textarea id="effect_stress_levels"></textarea>
-				<h4>4. For which other types of tasks do you see thermal interventions to be useful for?</h3>
-				<textarea id="other_task_types"></textarea>
-				<h4>5. How would you rate the appropriateness of the location of having heat/cold applied to your body? Which other locations would you deem suitable?</h3>
-				<textarea id="body_location"></textarea>
-				<h4>6. What did you specifically like about thermal interventions?</h3>
-				<textarea id="likes"></textarea>
-				<h4>7. What did you specifically dislike about thermal interventions?</h3>
-				<textarea id="dislikes"></textarea>
-				<h4>8. Any other comments?</h3>
-				<textarea id="comments"></textarea>
-				<button>Next</button>
-			</section>
+			
 			<section class="step_6">
-				<h2>That's it!</h2>
+				<h2>Thank you for your participation!</h2>
 				<div class="alert alert-warning" role="alert"></div>
-				<h4>Thanks for your participation!</h4>
 			</section>
 		</article>
 		<script src="/javascripts/jquery-1.8.3.min.js"></script>
