@@ -28,3 +28,6 @@ benchmarks/graphs
 
 # Log folder
 server/logs
+
+# ignore environment variables
+.env

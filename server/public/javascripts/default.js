@@ -21,7 +21,7 @@ $(document).ready(function() {
 		tableoutput = "",
 		no_score = "–",
 		weighted_tlx = false,
-		total_rounds = 5,
+		total_rounds = 1,
 		current_round = 1,
 		DEBUG = true,
 		settings = {},
