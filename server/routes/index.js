@@ -1,87 +1,69 @@
-var express = require('express'),
-	router = express.Router(),
-	fs = require('fs'),
-	yaml = require('yaml-config');
+// routes/index.js
 
-var settings = yaml.readConfig(__dirname + '/../config/server-config.yml'),
-    LOGDIRECTORY = __dirname + '/../' + settings.logDirectory,
-    LOGFILEEXTENSION = '.log',
-    OKRESPONSE = {'status': 'ok'};
-    FORMATERROR = {'status': 'error', 'info': 'malformed json request'};
+const express = require('express');
+const router = express.Router();
+const path = require('path');
+const mongoose = require('mongoose');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  // res.render('index', { title: 'Log Server' });
-  res.sendFile(path.join(__dirname + '/views/index.html'));
+// Connect to MongoDB (using the connection string in Render env var)
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
-/* save POST request to file */
-router.post('/', function(req, res, next) {
+// Define schema for logs
+const logSchema = new mongoose.Schema({
+  participant_id: String,
+  data: mongoose.Schema.Types.Mixed, // flexible JSON
+  version: String,
+  status: String,
+  created_at: { type: Date, default: Date.now },
+});
 
-    // req.body = JSON.stringify(req.body);
+// Create model
+const Log = mongoose.model('Log', logSchema);
 
-    console.log("POST request received:");
-    console.log(req.body);
+// Standard responses
+const OKRESPONSE = { status: 'ok' };
+const FORMATERROR = { status: 'error', info: 'malformed json request' };
 
-  	var settings,
-  		data,
-  		participant_id,
-  		ts = Date.now(),
-        logfile,
-        valid_request = true,
-        NEWLINE = '\r\n';
+/* GET home page */
+router.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, '../views/index.html'));
+});
 
-    if(req.body.settings) {
-        settings = req.body.settings;
-    } else {
-        valid_request = false;
-        FORMATERROR['err'] = 'missing settings object';
+/* POST request → save to MongoDB */
+router.post('/', async function (req, res) {
+  console.log('POST request received:');
+  console.log(req.body);
+
+  try {
+    const { settings, data, version, status } = req.body;
+
+    if (!settings) {
+      return res.status(400).json({ ...FORMATERROR, err: 'missing settings object' });
+    }
+    if (!data) {
+      return res.status(400).json({ ...FORMATERROR, err: 'missing data object' });
+    }
+    if (!settings.participant_id) {
+      return res.status(400).json({ ...FORMATERROR, err: 'missing participant_id in settings object' });
     }
 
-    if(req.body.data) {
-        data = req.body.data;
-    } else {
-        valid_request = false;
-        FORMATERROR['err'] = 'missing data object';
-    }
+    // Save log to MongoDB
+    await Log.create({
+      participant_id: settings.participant_id,
+      data,
+      version,
+      status,
+    });
 
-    if(valid_request && settings.participant_id) {
-        participant_id = settings.participant_id;
-    } else {
-        valid_request = false;
-        FORMATERROR['err'] = 'missing participant_id in settings object';
-    }
-
-    if(valid_request) {
-        logfile = LOGDIRECTORY + participant_id + LOGFILEEXTENSION;
-
-        fs.exists(logfile, function(exists) {
-            var line = JSON.stringify(req.body) + NEWLINE;
-            if (!exists) {
-                fs.writeFile(logfile, line, function(err) {
-                    if(err) {
-                        console.log(err);
-                        res.send(err);
-                    } else {
-                        console.log("+post request written to: " + logfile);
-                        res.send(OKRESPONSE);
-                    }
-                })
-            } else {
-                fs.appendFile(logfile, line, function(err) {
-                    if(err) {
-                        console.log(err);
-                        res.send(err);
-                    } else {
-                        console.log("+post request appended to: " + logfile); //" to: " + postRequestsLog);
-                        res.send(OKRESPONSE);
-                    }
-                }); 
-            }
-        });
-    } else {
-        res.send(FORMATERROR);
-    }
+    console.log('+post request saved to MongoDB');
+    res.json(OKRESPONSE);
+  } catch (err) {
+    console.error('MongoDB error:', err);
+    res.status(500).json({ status: 'error', info: 'failed to save log' });
+  }
 });
 
 module.exports = router;
