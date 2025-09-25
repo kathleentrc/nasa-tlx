@@ -1,7 +1,8 @@
 # NASA Task Load Index (NASA-TLX)
 ========
 
-An implementation of the NASA Task Load Index (NASA-TLX) including subjective feedback on conditions and demographic survey.
+## About
+This is an implementation of the NASA Task Load Index (NASA-TLX).
 
 ## General information
 From the respective [Wikipedia article](http://en.wikipedia.org/wiki/NASA-TLX):
@@ -30,7 +31,7 @@ Learn more about it at the official [NASA-TLX website](http://humansystems.arc.n
 
 For detailed instruction on how to install express, go to [https://expressjs.com/](https://expressjs.com/)
 
-## Author
+## Credits
 - [Francesco Schwarz](https://github.com/isellsoap/)
 - [Tilman Dingler](https://github.com/Til-D/)
 
