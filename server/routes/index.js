@@ -5,11 +5,10 @@ const router = express.Router();
 const path = require('path');
 const mongoose = require('mongoose');
 
-// Connect to MongoDB (using the connection string in Render env var)
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// Connect to MongoDB (Render env var should contain your connection string)
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log("MongoDB connected"))
+  .catch(err => console.error("MongoDB connection error:", err));
 
 // Define schema for logs
 const logSchema = new mongoose.Schema({
