@@ -88,3 +88,11 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+process.stdout.on('error', err => {
+  if (err.code === 'EPIPE' || err.code === 'ENOTCONN') {
+    // Ignore broken pipe / disconnected stdout
+  } else {
+    throw err;
+  }
+});
